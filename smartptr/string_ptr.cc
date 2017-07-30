@@ -19,7 +19,7 @@ StringPointer::StringPointer(std::string* ptr)
 {}
 
 StringPointer::~StringPointer() {
-    if(is_null) {
+    if (is_null) {
         delete ptr_;
     }
 }
