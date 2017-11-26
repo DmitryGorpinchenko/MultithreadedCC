@@ -2,35 +2,19 @@
 
 class StringPointer {
 public:
-    StringPointer(std::string* ptr);
-    ~StringPointer();
+    StringPointer(std::string* ptr) : ptr_(ptr ? ptr : new std::string()), owner(ptr == nullptr)  {}
+    ~StringPointer() { if (owner) { delete ptr_; } }
 
-    std::string* operator->();
-    operator std::string*();
+    StringPointer(const StringPointer& other) = delete;
+    StringPointer& operator=(const StringPointer& other) = delete;
+
+    std::string& operator*() { return *ptr_; }
+    std::string* operator->() { return ptr_; }
 
 private:
     std::string* ptr_;
-    bool is_null;
+    bool owner;
 };
-
-StringPointer::StringPointer(std::string* ptr) 
-    : ptr_(ptr ? ptr : new std::string())
-    , is_null(ptr == nullptr)
-{}
-
-StringPointer::~StringPointer() {
-    if (is_null) {
-        delete ptr_;
-    }
-}
-
-std::string* StringPointer::operator->() {
-    return ptr_;
-}
-
-StringPointer::operator std::string*() {
-    return ptr_;
-}
 
 int main() {
     std::string s1 = "Hello, world!";
