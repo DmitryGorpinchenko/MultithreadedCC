@@ -60,7 +60,7 @@ int init_tcp_socket(const char *addr, uint16_t port)
 	in_addr.sin_port = htons(port);
 	if (inet_pton(family, addr, &in_addr.sin_addr) <= 0)
 		return -1;
-	if (bind(s, (struct sockaddr *)&in_addr, sizeof(struct sockaddr_in)) < 0)
+	if (bind(s, (struct sockaddr *) &in_addr, sizeof(struct sockaddr_in)) < 0)
 		return -1;
 	return s;
 }

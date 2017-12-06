@@ -15,7 +15,6 @@ int main(int argc, char **argv)
 		return -1;
 	
 	run_chat(chat);
-	
 	free_chat(chat);
 	return 0;
 }
