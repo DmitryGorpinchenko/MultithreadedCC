@@ -1,5 +1,15 @@
-struct Chat;
+#include <memory>
 
-struct Chat *create_chat(int max_size, short port);
-void run_chat(struct Chat *chat);
-void free_chat(struct Chat *chat);
+class ChatServer {
+public:
+    class Error {};
+
+    ChatServer(short port);
+    ~ChatServer();
+
+    void run();
+private:
+    struct chat_impl;
+    std::unique_ptr<chat_impl> chat;
+};
+
